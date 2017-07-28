@@ -1,0 +1,39 @@
+﻿@using System.Globalization
+@using System.Diagnostics
+@model FileVersionInfo
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+<h2 class="label label-info">Index - Welcome</h2>
+<br />
+
+<div class="well">
+    The minimal MVC5 application with
+    <ol>
+        <li>Environment version: @Environment.Version</li>
+        <li>Bootstrap</li>
+        <li>JQuery1 or JQuery3 (depends on browser)</li>
+        <li>Dependency Injection with SimpleInjector IoC</li>
+    </ol>
+</div>
+<div>
+    <label class="label label-info">Server time @DateTime.Now.ToString(CultureInfo.InvariantCulture)</label>
+    <p>
+        @Model.Comments
+    </p>
+</div>
+
+<br />
+<br />
+<div>
+    <small>
+        <a href="https://github.com/netvietdev/aspnetmvc5-minimal">
+            <span class="glyphicon glyphicon-home"></span>
+            Github
+        </a>
+    </small>
+</div>
