@@ -1,10 +1,6 @@
-﻿using GdNet.IdentitySrv.Configuration;
-using IdentityServer3.AspNetIdentity;
-using IdentityServer3.Core.Configuration;
+﻿using IdentityServer3.Core.Configuration;
 using IdentityServer3.Core.Services;
 using IdentityServer3.EntityFramework;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Serilog;
@@ -108,16 +104,6 @@ namespace GdNet.IdentitySrv
                 string.Format(@"{0}\bin\Configuration\idsrv3test.pfx", AppDomain.CurrentDomain.BaseDirectory), "idsrv3test");
         }
 
-        public static class UserServiceFactory
-        {
-            public static AspNetIdentityUserService<IdentityUser, string> Create()
-            {
-                var context = new IdentityDbContext("AspNetIdentity");
-                var userStore = new UserStore<IdentityUser>(context);
-                var userManager = new UserManager<IdentityUser>(userStore);
-
-                return new AspNetIdentityUserService<IdentityUser, string>(userManager);
-            }
-        }
+        
     }
 }

@@ -156,6 +156,7 @@
     <Compile Include="Migrations\ScopeConfiguration\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UserServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
