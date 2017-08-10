@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+  <parameter name="appSettings SiteName"
+             description="Change SiteName in destination environment"
+             defaultValue="VNDEV Security Gateway">
+    <parameterEntry kind="XmlFile" scope="Web\.config"
+                    match="/configuration/appSettings/add[@key='SiteName']/@value" />
+  </parameter>
+  <parameter name="system.diagnostics myListener"
+             description="Change SiteName in destination environment"
+             defaultValue="Trace\.log">
+    <parameterEntry kind="XmlFile" scope="Web\.config"
+                    match="/configuration/system.diagnostics/trace/listeners/add[@name='myListener']/@initializeData" />
+  </parameter>
+</parameters>
