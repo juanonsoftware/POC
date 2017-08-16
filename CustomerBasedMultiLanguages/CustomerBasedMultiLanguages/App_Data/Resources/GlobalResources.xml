@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<resources>
+  <resource culture="en-US" name="WelcomeTitle" value="Welcome POC"></resource>
+
+  <resource culture="de-DE" name="WelcomeTitle" value="Willkommen POC"></resource>
+</resources>
