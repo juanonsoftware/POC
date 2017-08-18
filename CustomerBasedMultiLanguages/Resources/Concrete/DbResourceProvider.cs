@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Resources.Abstract;
+using Resources.Entities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Resources.Abstract;
-using Resources.Entities;
 
 namespace Resources.Concrete
 {
@@ -15,12 +12,15 @@ namespace Resources.Concrete
         // Database connection string        
         private static string connectionString = null;
 
-        public DbResourceProvider(){
+        public DbResourceProvider()
+            : base("Default")
+        {
 
             connectionString = ConfigurationManager.ConnectionStrings["MvcInternationalization"].ConnectionString;
         }
 
-        public DbResourceProvider(string connection)
+        public DbResourceProvider(string providerKey, string connection)
+            : base(providerKey)
         {
             connectionString = connection;
         }
@@ -31,14 +31,18 @@ namespace Resources.Concrete
 
             const string sql = "select Culture, Name, Value from dbo.Resources;";
 
-            using (var con = new SqlConnection(connectionString)) {
+            using (var con = new SqlConnection(connectionString))
+            {
                 var cmd = new SqlCommand(sql, con);
 
                 con.Open();
 
-                using (var reader = cmd.ExecuteReader()) {
-                    while (reader.Read()) {
-                        resources.Add(new ResourceEntry { 
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        resources.Add(new ResourceEntry
+                        {
                             Name = reader["Name"].ToString(),
                             Value = reader["Value"].ToString(),
                             Culture = reader["Culture"].ToString()
@@ -50,7 +54,7 @@ namespace Resources.Concrete
             }
 
             return resources;
-            
+
         }
 
         protected override ResourceEntry ReadResource(string name, string culture)
@@ -59,7 +63,8 @@ namespace Resources.Concrete
 
             const string sql = "select Culture, Name, Value from dbo.Resources where culture = @culture and name = @name;";
 
-            using (var con = new SqlConnection(connectionString)) {
+            using (var con = new SqlConnection(connectionString))
+            {
                 var cmd = new SqlCommand(sql, con);
 
                 cmd.Parameters.AddWithValue("@culture", culture);
@@ -67,9 +72,12 @@ namespace Resources.Concrete
 
                 con.Open();
 
-                using (var reader = cmd.ExecuteReader()) {
-                    if (reader.Read()) {
-                        resource = new ResourceEntry {
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        resource = new ResourceEntry
+                        {
                             Name = reader["Name"].ToString(),
                             Value = reader["Value"].ToString(),
                             Culture = reader["Culture"].ToString()
@@ -80,12 +88,12 @@ namespace Resources.Concrete
                 }
             }
 
-            return resource;            
-           
+            return resource;
+
         }
 
-       
 
-       
+
+
     }
 }

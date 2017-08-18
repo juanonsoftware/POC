@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Resources.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Resources.Entities;
 
 namespace Resources.Abstract
 {
-    public abstract class BaseResourceProvider: IResourceProvider
+    public abstract class BaseResourceProvider : IResourceProvider
     {
-        // Cache list of resources
-        private static Dictionary<string, ResourceEntry> resources = null;
-        private static object lockResources = new object();
+        private readonly string _providerKey;
 
-        public BaseResourceProvider() {
+        // Cache list of resources
+        private readonly static IDictionary<string, IDictionary<string, ResourceEntry>> resources = new Dictionary<string, IDictionary<string, ResourceEntry>>();
+        private static readonly object lockResources = new object();
+
+        protected BaseResourceProvider(string providerKey)
+        {
+            _providerKey = providerKey;
             Cache = true; // By default, enable caching for performance
         }
 
@@ -36,23 +38,25 @@ namespace Resources.Abstract
             // normalize
             culture = culture.ToLowerInvariant();
 
-            if (Cache && resources == null) {
+            if (Cache)
+            {
                 // Fetch all resources
-                
-                lock (lockResources) {
-
-                    if (resources == null) {
-                        resources = ReadResources().ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
+                if (!resources.ContainsKey(_providerKey))
+                {
+                    lock (lockResources)
+                    {
+                        if (!resources.ContainsKey(_providerKey))
+                        {
+                            var res = ReadResources().ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
+                            resources.Add(_providerKey, res);
+                        }
                     }
                 }
-            }
 
-            if (Cache) {
-                return resources[string.Format("{0}.{1}", culture, name)].Value;
+                return resources[_providerKey][string.Format("{0}.{1}", culture, name)].Value;
             }
 
             return ReadResource(name, culture).Value;
-
         }
 
 
@@ -70,6 +74,6 @@ namespace Resources.Abstract
         /// <param name="culture">Culture code</param>
         /// <returns>Resource</returns>
         protected abstract ResourceEntry ReadResource(string name, string culture);
-        
+
     }
 }
