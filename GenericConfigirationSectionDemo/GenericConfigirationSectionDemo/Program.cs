@@ -1,9 +1,6 @@
-﻿using Rabbit.SerializationMaster;
-using Rabbit.SerializationMaster.Strategies;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 
 namespace GenericConfigirationSectionDemo
 {
