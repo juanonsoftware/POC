@@ -57,10 +57,7 @@ namespace GdNet.DataArt
 
                     using (var reader = command.ExecuteReader(CommandBehavior.CloseConnection))
                     {
-                        if (handler != null)
-                        {
-                            handler(reader);
-                        }
+                        handler?.Invoke(reader);
                     }
                 }
             }
