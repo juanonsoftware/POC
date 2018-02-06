@@ -10,8 +10,8 @@ namespace Resources.Abstract
         private readonly string _providerKey;
 
         // Cache list of resources
-        private readonly static IDictionary<string, IDictionary<string, ResourceEntry>> resources = new Dictionary<string, IDictionary<string, ResourceEntry>>();
-        private static readonly object lockResources = new object();
+        protected static readonly IDictionary<string, IDictionary<string, ResourceEntry>> Resources = new Dictionary<string, IDictionary<string, ResourceEntry>>();
+        private static readonly object LockResources = new object();
 
         protected BaseResourceProvider(string providerKey)
         {
@@ -41,19 +41,19 @@ namespace Resources.Abstract
             if (Cache)
             {
                 // Fetch all resources
-                if (!resources.ContainsKey(_providerKey))
+                if (!Resources.ContainsKey(_providerKey))
                 {
-                    lock (lockResources)
+                    lock (LockResources)
                     {
-                        if (!resources.ContainsKey(_providerKey))
+                        if (!Resources.ContainsKey(_providerKey))
                         {
-                            var res = ReadResources().ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
-                            resources.Add(_providerKey, res);
+                            LoadResourceEntities();
                         }
                     }
                 }
 
-                return resources[_providerKey][string.Format("{0}.{1}", culture, name)].Value;
+                //return resources[_providerKey][string.Format("{0}.{1}", culture, name)].Value;
+                return GetResourceFallback(name, culture);
             }
 
             return ReadResource(name, culture).Value;
@@ -66,7 +66,6 @@ namespace Resources.Abstract
         /// <returns>A list of resources</returns>
         protected abstract IList<ResourceEntry> ReadResources();
 
-
         /// <summary>
         /// Returns a single resource for a specific culture
         /// </summary>
@@ -75,5 +74,15 @@ namespace Resources.Abstract
         /// <returns>Resource</returns>
         protected abstract ResourceEntry ReadResource(string name, string culture);
 
+        protected virtual void LoadResourceEntities()
+        {
+            var res = ReadResources().ToDictionary(r => string.Format("{0}.{1}", r.Culture.ToLowerInvariant(), r.Name));
+            Resources.Add(_providerKey, res);
+        }
+
+        protected virtual object GetResourceFallback(string name, string culture)
+        {
+            return Resources[_providerKey][string.Format("{0}.{1}", culture, name)].Value;
+        }
     }
 }
