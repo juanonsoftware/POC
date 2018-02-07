@@ -25,7 +25,9 @@ namespace Resources.Utility
         public string Create(BaseResourceProvider provider, string namespaceName = "Resources", string className = "Resources", string filePath = null, string summaryCulture = null)
         {
             // Retrieve all resources           
-            MethodInfo method = provider.GetType().GetMethod("ReadResources", BindingFlags.Instance | BindingFlags.NonPublic);
+            //MethodInfo method = provider.GetType().GetMethod("ReadResources", BindingFlags.Instance | BindingFlags.NonPublic);
+            MethodInfo method = provider.GetType().GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
+                .First(x => x.Name == "ReadResources" && x.GetParameters().Length == 0);
 
             IList<ResourceEntry> resources = method.Invoke(provider, null) as List<ResourceEntry>;
 
