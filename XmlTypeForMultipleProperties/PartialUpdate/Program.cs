@@ -47,6 +47,13 @@ namespace PartialUpdate
                 });
 
                 Console.WriteLine("Partial update: " + result);
+
+                // This will try to update the whole entity
+                var result2 = con.Update(new Employee2()
+                {
+                    Id = employee2.Id,
+                    FullName = "Emp 00000002",
+                });
             }
 
             Console.ReadLine();
