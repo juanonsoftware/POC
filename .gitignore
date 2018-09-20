@@ -193,3 +193,9 @@ ModelManifest.xml
 /TestOAuthSessionTimeout/packages
 /XmlTypeForMultipleProperties/packages
 /WebApiUploadFiles/packages
+/CustomerBasedMultiLanguages/packages
+/CustomResourceProviders/packages
+/DapperCustomPropertyColumnMapping/packages
+/GenericConfigirationSectionDemo/packages
+/IdentityServerAspNetIdentity/IdentityServerAspNetIdentity/packages
+/TestNetFrameworks/packages
