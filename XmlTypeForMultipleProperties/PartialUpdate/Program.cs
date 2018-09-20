@@ -1,11 +1,12 @@
 ﻿using Dapper;
+using Dapper.Contrib.Extensions;
 using Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 
-namespace XmlTypeForMultipleProperties
+namespace PartialUpdate
 {
     class Program
     {
@@ -36,6 +37,16 @@ namespace XmlTypeForMultipleProperties
                 });
 
                 Console.WriteLine("Inserted: " + count);
+
+
+                // This only updated FullName, other fields are not being changed
+                var result = con.Update(new EmployeePartialTest()
+                {
+                    Id = employee1.Id,
+                    FullName = "E 01",
+                });
+
+                Console.WriteLine("Partial update: " + result);
             }
 
             Console.ReadLine();

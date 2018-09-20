@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XmlTypeForMultipleProperties
+namespace Models
 {
     public static class DictionaryHelper
     {

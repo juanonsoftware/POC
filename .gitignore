@@ -189,3 +189,7 @@ _Pvt_Extensions/
 ModelManifest.xml
 /FluentEmailTesting/packages
 /XmlTypeForMultipleProperties/XmlTypeForMultipleProperties/packages
+/SerializeDynamicToJson/packages
+/TestOAuthSessionTimeout/packages
+/XmlTypeForMultipleProperties/packages
+/WebApiUploadFiles/packages

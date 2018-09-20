@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using GdNet.Common;
 
-namespace XmlTypeForMultipleProperties
+namespace Models
 {
     public abstract class DynamicPropertyBase
     {

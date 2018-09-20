@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace XmlTypeForMultipleProperties
+namespace Models
 {
     public class Employee : DynamicPropertyBase
     {
