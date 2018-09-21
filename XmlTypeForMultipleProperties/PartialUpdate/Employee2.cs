@@ -1,10 +1,9 @@
-using Dapper.Contrib.Extensions;
-using Models;
-
 namespace PartialUpdate
 {
-    [Table("Employees")]
-    public class Employee2 : Employee
+    public class Employee2
     {
+        public int Id { get; set; }
+
+        public string FullName { get; set; }
     }
 }

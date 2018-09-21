@@ -48,12 +48,16 @@ namespace PartialUpdate
 
                 Console.WriteLine("Partial update: " + result);
 
-                // This will try to update the whole entity
+                // This will try to update the entity (use TableNameMapper)
+                DapperConfig.RegisterTableMapper();
+
                 var result2 = con.Update(new Employee2()
                 {
                     Id = employee2.Id,
                     FullName = "Emp 00000002",
                 });
+
+                Console.WriteLine("Update Employee2: " + result2);
             }
 
             Console.ReadLine();
