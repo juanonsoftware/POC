@@ -199,3 +199,4 @@ ModelManifest.xml
 /GenericConfigirationSectionDemo/packages
 /IdentityServerAspNetIdentity/IdentityServerAspNetIdentity/packages
 /TestNetFrameworks/packages
+/log4net.TweetAppender/packages/log4net.2.0.8

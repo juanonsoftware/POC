@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("KeyEngine")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Provide core functions to generate and validate license key")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("RabbitSoftware")]
 [assembly: AssemblyProduct("KeyEngine")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
