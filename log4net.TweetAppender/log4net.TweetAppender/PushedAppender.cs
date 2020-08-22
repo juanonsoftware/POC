@@ -8,6 +8,7 @@ namespace log4net.TweetAppender
 {
     public class PushedAppender : AppenderSkeleton
     {
+        private readonly HttpClient _client = new HttpClient();
         private string _appKey = string.Empty;
         private string _appSecret = string.Empty;
         private string _appUrl = string.Empty;
@@ -40,13 +41,10 @@ namespace log4net.TweetAppender
 
         private async Task PostEvent(LoggingEvent loggingEvent)
         {
-            using (var client = new HttpClient())
-            {
-                var json = BuildJson(loggingEvent);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(_appUrl, content);
-                response.EnsureSuccessStatusCode();
-            }
+            var json = BuildJson(loggingEvent);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync(_appUrl, content);
+            response.EnsureSuccessStatusCode();
         }
 
         private string BuildJson(LoggingEvent loggingEvent)
