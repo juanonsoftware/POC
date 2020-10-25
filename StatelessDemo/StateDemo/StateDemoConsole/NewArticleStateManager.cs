@@ -2,24 +2,15 @@
 
 namespace StateDemoConsole
 {
-    public class Article
+    public class NewArticleStateManager
     {
         private readonly StateMachine<State, Action> _stateMachine;
 
-        public State State { get; set; } = State.New;
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public Article(string title, string description)
+        public NewArticleStateManager(NewArticle article)
         {
-            Title = title;
-            Description = description;
-
             _stateMachine = new StateMachine<State, Action>(
-                () => State,
-                s => State = s);
+                () => article.State,
+                s => article.State = s);
 
             _stateMachine.Configure(State.New)
                 .Permit(Action.Validate, State.Validated)
