@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+    <metadata minClientVersion="3.3">
+        <id>SampleWebApplication</id>
+        <version>1.0.0</version>
+        <title>SampleWebApplication</title>
+        <authors>juanonsoftware</authors>
+        <description>This package is created by juanonsoftware</description>
+    </metadata>
+	<files>
+		<file src="*.zip" target="PackageContent" />
+	</files>
+</package>

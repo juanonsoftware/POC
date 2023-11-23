@@ -1,0 +1,1 @@
+.\NuGet.exe pack SampleWebApplication.nuspec
